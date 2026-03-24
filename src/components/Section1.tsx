@@ -58,8 +58,10 @@ export default function Section1() {
             alt="Modern futuristic building" 
             className="w-full h-full object-cover"
             style={{
-              WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,1) 30%)',
-              maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,1) 30%)'
+              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%), linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 85%, transparent 100%)',
+              WebkitMaskComposite: 'source-in',
+              maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%), linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 85%, transparent 100%)',
+              maskComposite: 'intersect'
             }}
           />
           
