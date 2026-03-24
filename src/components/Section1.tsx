@@ -52,11 +52,15 @@ export default function Section1() {
 
       {/* Hero Image & Overlaps */}
       <div className="relative z-10 px-6">
-        <div className="relative w-full h-[600px] rounded-[2rem] overflow-hidden shadow-2xl">
+        <div className="relative w-full h-[600px] rounded-[2rem] overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm">
           <img 
             src="/images/hero.png" 
             alt="Modern futuristic building" 
             className="w-full h-full object-cover"
+            style={{
+              WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,1) 30%)',
+              maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,1) 30%)'
+            }}
           />
           
           {/* Bottom left overlap inside the image boundary but could stick out */}
