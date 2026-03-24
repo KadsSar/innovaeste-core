@@ -1,5 +1,5 @@
-
-import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2 } from 'lucide-react';
+import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2, ChevronLeft } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Dashboard() {
   return (
@@ -8,12 +8,17 @@ export default function Dashboard() {
         
         {/* Section 1: Header */}
         <header className="flex justify-between items-center border-b border-slate-800 pb-6">
-          <div>
-            <div className="flex items-baseline space-x-3">
-              <h1 className="font-serif text-4xl text-slate-100">Innovaeste</h1>
-              <span className="font-serif text-2xl text-slate-400">Orchestrator</span>
+          <div className="flex items-center space-x-6">
+            <Link to="/" className="p-2 rounded-full hover:bg-slate-800/80 text-slate-400 hover:text-white transition-colors border border-transparent hover:border-slate-700">
+              <ChevronLeft className="w-5 h-5" />
+            </Link>
+            <div>
+              <div className="flex items-baseline space-x-3">
+                <h1 className="font-serif text-4xl text-slate-100">Innovaeste</h1>
+                <span className="font-serif text-2xl text-slate-400">Orchestrator</span>
+              </div>
+              <p className="mt-2 text-sm text-slate-400">Live AI Operations &amp; Task Routing</p>
             </div>
-            <p className="mt-2 text-sm text-slate-400">Live AI Operations &amp; Task Routing</p>
           </div>
           <div className="flex items-center space-x-2 px-4 py-2 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-400 text-sm font-medium">
             <span className="relative flex h-2 w-2">
