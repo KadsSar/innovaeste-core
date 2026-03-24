@@ -51,8 +51,8 @@ export default function Section1() {
       </div>
 
       {/* Hero Image & Overlaps */}
-      <div className="relative z-10 px-6">
-        <div className="relative w-full h-[600px] rounded-[2rem] overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm">
+      <div className="relative z-10">
+        <div className="relative w-full h-[600px] overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm">
           <img 
             src="/images/hero.png" 
             alt="Modern futuristic building" 
