@@ -37,13 +37,13 @@ export default function LoadingPage() {
 
       <div className="w-80 sm:w-96 relative h-24 flex items-end">
         {/* Destination Hotel */}
-        <div className="absolute right-0 bottom-0 flex flex-col items-center text-slate-300">
-          <Building2 className="w-12 h-12 mb-1" />
+        <div className="absolute right-0 bottom-0 w-16 flex flex-col items-center text-slate-300">
+          <Building2 className="w-10 h-10 mb-1" />
           <span className="text-[10px] tracking-widest uppercase font-medium">Hotel</span>
         </div>
 
         {/* Path line */}
-        <div className="absolute bottom-2 left-0 right-10 h-[2px] bg-slate-800 rounded-full overflow-hidden">
+        <div className="absolute bottom-2 left-0 right-20 h-[2px] bg-slate-800 rounded-full overflow-hidden">
           <div 
             className="h-full bg-orange-500/50 transition-all duration-[4900ms] ease-linear"
             style={{ width: moving ? '100%' : '0%' }}
@@ -54,7 +54,7 @@ export default function LoadingPage() {
         <div 
           className="absolute bottom-2 transition-all duration-[4500ms] ease-in-out flex flex-col items-center z-10"
           style={{ 
-            left: moving ? 'calc(100% - 3.5rem)' : '0%',
+            left: moving ? 'calc(100% - 6rem)' : '0%',
           }}
         >
           <div className="animate-bounce">
