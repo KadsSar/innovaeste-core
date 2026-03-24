@@ -1,5 +1,6 @@
 import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2, ChevronLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import LiveHotelMap from '../components/LiveHotelMap';
 
 export default function Dashboard() {
   return (
@@ -93,6 +94,9 @@ export default function Dashboard() {
             </div>
           </div>
         </section>
+
+        {/* Section 3.5: Live 2D Hotel Map */}
+        <LiveHotelMap />
 
         {/* Section 4: Live Operations Feed */}
         <section className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
