@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Bot, Wrench, BatteryCharging, Home, Droplets } from 'lucide-react';
+import { Bot, Wrench, BatteryCharging, Home, Droplets, Dumbbell, Coffee, Wind, Waves } from 'lucide-react';
 
 type BotState = {
   id: string;
@@ -14,100 +14,134 @@ type BotState = {
 type RoomState = {
   id: string;
   name: string;
+  type: 'villa' | 'facility';
   x: number;
   y: number;
   request: string | null;
+  icon: React.ReactNode;
 };
 
 export default function LiveHotelMap() {
-  const [rooms, setRooms] = useState<Record<string, RoomState>>({
-    'villa-sol': { id: 'villa-sol', name: 'Villa Sol', x: 25, y: 20, request: null },
-    'villa-luna': { id: 'villa-luna', name: 'Villa Luna', x: 75, y: 25, request: null },
-    'villa-mar': { id: 'villa-mar', name: 'Villa Mar', x: 50, y: 75, request: null },
+  const [nodes, setNodes] = useState<Record<string, RoomState>>({
+    // Ocean View Villas (Top)
+    'villa-sol': { id: 'villa-sol', name: 'Villa Sol', type: 'villa', x: 25, y: 15, request: null, icon: <Home size={18}/> },
+    'villa-luna': { id: 'villa-luna', name: 'Villa Luna', type: 'villa', x: 45, y: 15, request: null, icon: <Home size={18}/> },
+    'villa-estrella': { id: 'villa-estrella', name: 'Villa Estrella', type: 'villa', x: 65, y: 15, request: null, icon: <Home size={18}/> },
+    'villa-cielo': { id: 'villa-cielo', name: 'Villa Cielo', type: 'villa', x: 85, y: 15, request: null, icon: <Home size={18}/> },
+    
+    // Facilities (Center Right)
+    'spa': { id: 'spa', name: 'Ocean Spa', type: 'facility', x: 80, y: 45, request: null, icon: <Wind size={18}/> },
+    'gym': { id: 'gym', name: 'Tribal Gym', type: 'facility', x: 60, y: 55, request: null, icon: <Dumbbell size={18}/> },
+    'dining': { id: 'dining', name: 'Panorama Dining', type: 'facility', x: 40, y: 45, request: null, icon: <Coffee size={18}/> },
+
+    // Garden Villas (Bottom)
+    'villa-flora': { id: 'villa-flora', name: 'Villa Flora', type: 'villa', x: 30, y: 85, request: null, icon: <Home size={18}/> },
+    'villa-fauna': { id: 'villa-fauna', name: 'Villa Fauna', type: 'villa', x: 55, y: 85, request: null, icon: <Home size={18}/> },
+    'villa-mar': { id: 'villa-mar', name: 'Villa Mar', type: 'villa', x: 80, y: 85, request: null, icon: <Home size={18}/> },
   });
 
   const [botA, setBotA] = useState<BotState>({
-    id: 'A', name: 'Robotics Unit 01', x: 10, y: 50, status: 'IDLE', color: 'bg-accent-orange text-white', icon: <Bot size={16} />
+    id: 'A', name: 'Service Bot 01', x: 8, y: 50, status: 'IDLE', color: 'bg-accent-orange text-white', icon: <Bot size={16} />
   });
   
   const [botB, setBotB] = useState<BotState>({
-    id: 'B', name: 'IT & Maintenance', x: 10, y: 50, status: 'CHARGING', color: 'bg-blue-500 text-white', icon: <Wrench size={16} />
+    id: 'B', name: 'Maintenance Unit', x: 8, y: 50, status: 'CHARGING', color: 'bg-blue-500 text-white', icon: <Wrench size={16} />
   });
 
   useEffect(() => {
     let mounted = true;
 
-    const setRoomRequest = (roomId: string, request: string | null) => {
-      setRooms(prev => ({
+    const setRequest = (id: string, request: string | null) => {
+      setNodes(prev => ({
         ...prev,
-        [roomId]: { ...prev[roomId], request }
+        [id]: { ...prev[id], request }
       }));
     };
 
     const runBotASequence = async () => {
       while (mounted) {
-        // Base
-        setBotA(prev => ({ ...prev, x: 10, y: 50, status: 'IDLE' }));
+        setBotA(prev => ({ ...prev, x: 8, y: 50, status: 'IDLE' }));
         await wait(3000);
         
-        // Request comes in for Room Service
+        // Task 1: Room Service at Villa Luna
         if(!mounted) return;
-        setRoomRequest('villa-luna', 'I need room service! 🍔');
+        setRequest('villa-luna', 'I need room service! 🍔');
+        await wait(2000);
+        setBotA(prev => ({ ...prev, status: 'DISPATCHED' }));
+        await wait(1000);
+        setBotA(prev => ({ ...prev, x: 45, y: 15, status: 'DELIVERING' }));
+        await wait(7000); 
+        setRequest('villa-luna', null);
+        setBotA(prev => ({ ...prev, status: 'COMPLETED' }));
         await wait(2000);
 
-        setBotA(prev => ({ ...prev, status: 'RESPONDING' }));
+        // Task 2: Drinks to Spa
+        if(!mounted) return;
+        setRequest('spa', 'Fresh towels & cucumber water 🥒');
+        await wait(2000);
+        setBotA(prev => ({ ...prev, status: 'REROUTING' }));
         await wait(1000);
-        
-        // Move to Villa Luna
-        setBotA(prev => ({ ...prev, x: 75, y: 25, status: 'DELIVERING' }));
-        await wait(7000); // Slower movement
-        
-        // Un-set request
-        setRoomRequest('villa-luna', null);
-        setBotA(prev => ({ ...prev, status: 'TASK COMPLETE' }));
+        setBotA(prev => ({ ...prev, x: 80, y: 45, status: 'DELIVERING' }));
+        await wait(7000);
+        setRequest('spa', null);
+        setBotA(prev => ({ ...prev, status: 'COMPLETED' }));
+        await wait(2000);
+
+        // Task 3: Champagne to Villa Mar
+        if(!mounted) return;
+        setRequest('villa-mar', 'Champagne delivery please 🍾');
+        await wait(2000);
+        setBotA(prev => ({ ...prev, x: 80, y: 85, status: 'DELIVERING' }));
+        await wait(7000);
+        setRequest('villa-mar', null);
+        setBotA(prev => ({ ...prev, status: 'COMPLETED' }));
         await wait(2000);
 
         // Return to base
-        setBotA(prev => ({ ...prev, x: 10, y: 50, status: 'RETURNING' }));
-        await wait(7000);
+        setBotA(prev => ({ ...prev, x: 8, y: 50, status: 'RETURNING' }));
+        await wait(8000);
       }
     };
 
     const runBotBSequence = async () => {
-      await wait(8000); // offset
+      await wait(7000); // 7s offset
       while (mounted) {
-        // Base
-        setBotB(prev => ({ ...prev, x: 10, y: 50, status: 'IDLE' }));
-        await wait(3000);
+        setBotB(prev => ({ ...prev, x: 8, y: 50, status: 'IDLE' }));
+        await wait(4000);
         
-        // Request comes in for A/C
+        // Task 1: A/C Repair
         if(!mounted) return;
-        setRoomRequest('villa-sol', 'My A/C is broken! ❄️');
+        setRequest('villa-sol', 'My A/C is broken! ❄️');
         await wait(2000);
-
-        // Move to Villa Sol
-        setBotB(prev => ({ ...prev, x: 25, y: 20, status: 'INVESTIGATING' }));
-        await wait(5000); 
-        
-        // Clear request
-        setRoomRequest('villa-sol', null);
+        setBotB(prev => ({ ...prev, x: 25, y: 15, status: 'INVESTIGATING' }));
+        await wait(7000); 
+        setRequest('villa-sol', null);
         setBotB(prev => ({ ...prev, status: 'REPAIRING' }));
         await wait(4000);
 
-        // Next Request: Bedsheets
-        setRoomRequest('villa-mar', 'Bedsheets need changing 🛏️');
+        // Task 2: Gym equipment maintenance
+        if(!mounted) return;
+        setRequest('gym', 'Treadmill 4 is stuck 🏃‍♂️');
         await wait(2000);
-
-        setBotB(prev => ({ ...prev, x: 50, y: 75, status: 'REROUTING' }));
+        setBotB(prev => ({ ...prev, x: 60, y: 55, status: 'REROUTING' }));
         await wait(6000);
-
-        setRoomRequest('villa-mar', null);
-        setBotB(prev => ({ ...prev, status: 'CLEANING' }));
+        setRequest('gym', null);
+        setBotB(prev => ({ ...prev, status: 'MAINTENANCE' }));
         await wait(4000);
-        
-        // Return to base
-        setBotB(prev => ({ ...prev, x: 10, y: 50, status: 'RETURNING' }));
+
+        // Task 3: Cleaning at Villa Fauna
+        if(!mounted) return;
+        setRequest('villa-fauna', 'Bedsheets need changing 🛏️');
+        await wait(2000);
+        setBotB(prev => ({ ...prev, x: 55, y: 85, status: 'REROUTING' }));
         await wait(6000);
+        setRequest('villa-fauna', null);
+        setBotB(prev => ({ ...prev, status: 'CLEANING' }));
+        await wait(5000);
+        
+        // Return
+        setBotB(prev => ({ ...prev, x: 8, y: 50, status: 'RETURNING' }));
+        await wait(8000);
       }
     };
 
@@ -138,70 +172,89 @@ export default function LiveHotelMap() {
         </div>
       </div>
 
-      <div className="relative w-full h-[500px] bg-[#eef7ec] border border-green-200/50 rounded-xl overflow-hidden shadow-inner font-sans">
+      <div className="relative w-full h-[600px] bg-[#eef7ec] border border-green-200/50 rounded-xl overflow-hidden shadow-inner font-sans">
         
-        {/* Landscape Elements (Trees, Pools, Paths) */}
-        
-        {/* Paths (SVG) */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ filter: 'drop-shadow(0px 2px 0px rgba(0,0,0,0.05))' }}>
-          {/* Main Path from Base */}
-          <path d="M 100 250 L 800 250" stroke="#d1ba98" strokeWidth="12" strokeLinecap="round" fill="none" strokeDasharray="4 4" />
-          {/* Path to Sol */}
-          <path d="M 250 250 L 250 100" stroke="#d1ba98" strokeWidth="12" strokeLinecap="round" fill="none" strokeDasharray="4 4" />
-          {/* Path to Luna */}
-          <path d="M 750 250 L 750 125" stroke="#d1ba98" strokeWidth="12" strokeLinecap="round" fill="none" strokeDasharray="4 4" />
-          {/* Path to Mar */}
-          <path d="M 500 250 C 500 350, 400 350, 500 375" stroke="#d1ba98" strokeWidth="12" strokeLinecap="round" fill="none" strokeDasharray="4 4" />
-        </svg>
+        {/* Terrain Zones */}
+        {/* Ocean Stripe (Top) */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-blue-100/50 border-b border-blue-200/50 flex flex-col items-center justify-end pb-2">
+           <Waves className="w-24 h-24 text-blue-200/30 absolute top-2 right-20" />
+           <Waves className="w-24 h-24 text-blue-200/30 absolute top-4 left-40" />
+           <span className="text-[10px] text-blue-400/80 font-bold tracking-[0.2em] uppercase">Private Beach Access</span>
+        </div>
 
-        {/* Trees */}
-        <div className="absolute top-10 left-10 w-12 h-12 bg-green-600/20 rounded-full blur-md"></div>
-        <div className="absolute top-12 left-12 w-8 h-8 bg-green-700/40 rounded-full"></div>
+        {/* Sand Zone */}
+        <div className="absolute top-32 left-0 right-0 h-16 bg-[#fbf5e6] opacity-70"></div>
 
-        <div className="absolute top-20 left-1/3 w-16 h-16 bg-green-600/20 rounded-full blur-md"></div>
-        <div className="absolute top-24 left-[34%] w-10 h-10 bg-green-700/40 rounded-full"></div>
+        {/* Central Resort Area (Paving) */}
+        <div className="absolute top-[40%] left-[30%] w-[60%] h-[30%] bg-white/40 rounded-3xl blur-md"></div>
 
-        <div className="absolute bottom-10 right-20 w-20 h-20 bg-green-600/20 rounded-full blur-md"></div>
-        <div className="absolute bottom-12 right-[5.5rem] w-12 h-12 bg-green-700/40 rounded-full"></div>
-
-        {/* Pools */}
-        <div className="absolute bottom-20 left-20">
-          <div className="w-32 h-20 bg-blue-200/60 rounded-[40%] border-4 border-blue-100 flex items-center justify-center relative overflow-hidden">
-             <div className="absolute inset-0 bg-blue-300/30 pattern-wavy"></div>
-             <Droplets className="w-6 h-6 text-blue-500/50" />
+        {/* Huge Lagoon Pool (Bottom left) */}
+        <div className="absolute bottom-10 left-10">
+          <div className="w-64 h-40 bg-blue-200/80 rounded-[40%_60%_70%_30%] border-4 border-blue-100 flex items-center justify-center relative overflow-hidden shadow-inner">
+             <div className="absolute inset-0 bg-blue-300/20 pattern-wavy"></div>
+             <Droplets className="w-12 h-12 text-blue-500/30" />
           </div>
         </div>
 
+        {/* Paths (SVG) */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ filter: 'drop-shadow(0px 2px 0px rgba(0,0,0,0.05))' }}>
+           {/* Main central spine */}
+          <path d="M 8% 50% L 90% 50%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+          
+          {/* Branches Top */}
+          <path d="M 25% 50% L 25% 15%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+          <path d="M 45% 50% L 45% 15%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+          <path d="M 65% 50% L 65% 15%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+          <path d="M 85% 50% L 85% 15%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+
+          {/* Branches Facilities */}
+          <path d="M 40% 50% L 40% 45%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+          <path d="M 60% 50% L 60% 55%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+          <path d="M 80% 50% L 80% 45%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+
+          {/* Branches Bottom */}
+          <path d="M 30% 50% L 30% 85%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+          <path d="M 55% 50% L 55% 85%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+          <path d="M 80% 50% L 80% 85%" stroke="#d1ba98" strokeWidth="8" strokeLinecap="round" fill="none" strokeDasharray="6 6" />
+        </svg>
+
+        {/* Trees */}
+        <div className="absolute top-[48%] left-[20%] w-16 h-16 bg-green-700/30 rounded-full blur-sm"></div>
+        <div className="absolute top-[52%] left-[40%] w-12 h-12 bg-green-800/40 rounded-full blur-sm"></div>
+        <div className="absolute bottom-[20%] right-[30%] w-24 h-24 bg-green-600/20 rounded-full blur-md"></div>
+        <div className="absolute top-[30%] right-[10%] w-20 h-20 bg-green-700/30 rounded-full blur-sm"></div>
+
         {/* Base Station */}
-        <div className="absolute left-8 top-1/2 -translate-y-1/2 w-24 h-24 bg-slate-800 text-white rounded-xl shadow-2xl z-10 flex flex-col items-center justify-center border-b-4 border-slate-900">
-          <BatteryCharging className="w-6 h-6 mb-1 text-slate-400" />
-          <span className="text-[10px] uppercase tracking-widest font-bold text-center">Hub</span>
+        <div className="absolute left-[8%] top-[50%] -translate-y-1/2 w-28 h-28 bg-slate-800 text-white rounded-xl shadow-2xl z-10 flex flex-col items-center justify-center border-b-4 border-slate-900 -translate-x-1/2">
+          <BatteryCharging className="w-8 h-8 mb-1 text-slate-400" />
+          <span className="text-[11px] uppercase tracking-widest font-bold text-center leading-tight">Hub<br/>Station</span>
         </div>
 
-        {/* Rooms */}
-        {(Object.values(rooms) as RoomState[]).map(room => (
+        {/* Nodes (Rooms & Facilities) */}
+        {Object.values(nodes).map(node => (
           <div 
-            key={room.id}
+            key={node.id}
             className="absolute z-10 flex flex-col items-center justify-center"
-            style={{ left: `${room.x}%`, top: `${room.y}%`, transform: 'translate(-50%, -50%)' }}
+            style={{ left: `${node.x}%`, top: `${node.y}%`, transform: 'translate(-50%, -50%)' }}
           >
             {/* Request Chat Bubble */}
             <div className={`
-              absolute -top-16 left-1/2 -translate-x-1/2 w-max max-w-[150px]
-              bg-white text-slate-700 p-2 rounded-xl shadow-xl border border-gray-100
-              text-[10px] sm:text-xs font-medium text-center transition-all duration-300 origin-bottom
-              ${room.request ? 'opacity-100 scale-100' : 'opacity-0 scale-50 pointer-events-none'}
+              absolute -top-20 left-1/2 -translate-x-1/2 w-max max-w-[180px]
+              bg-white text-slate-700 px-3 py-2 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-gray-100
+              text-[10px] sm:text-xs font-medium text-center transition-all duration-300 origin-bottom z-40
+              ${node.request ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4 pointer-events-none'}
             `}>
-              {room.request}
+              {node.request}
               <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-b border-r border-gray-100 transform rotate-45"></div>
             </div>
 
-            <div className="w-16 h-16 bg-orange-50/90 border-2 border-orange-200/50 rounded-lg shadow-lg flex flex-col items-center justify-center relative overflow-hidden backdrop-blur-sm">
-               {/* Tiny roof graphic */}
-               <div className="absolute top-0 inset-x-0 h-4 bg-orange-200/50"></div>
-               <Home className="w-5 h-5 text-orange-600 mt-2" />
+            <div className={`
+              w-14 h-14 rounded-full shadow-lg flex flex-col items-center justify-center relative overflow-hidden backdrop-blur-sm z-10
+              ${node.type === 'villa' ? 'bg-orange-50/90 border-2 border-orange-200 text-orange-600' : 'bg-slate-50/90 border-2 border-slate-300 text-slate-600'}
+            `}>
+               {node.icon}
             </div>
-            <span className="mt-2 text-xs font-bold text-slate-700 bg-white/80 px-2 py-0.5 rounded shadow-sm">{room.name}</span>
+            <span className="mt-2 text-[10px] font-bold text-slate-700 bg-white/90 px-2 py-0.5 rounded-full shadow-sm whitespace-nowrap">{node.name}</span>
           </div>
         ))}
 
@@ -220,11 +273,17 @@ function BotIcon({ bot }: { bot: BotState }) {
   return (
     <>
       <div 
-        className="absolute z-30 transition-all duration-[1000ms] pointer-events-none"
-        style={{ left: `${bot.x}%`, top: `calc(${bot.y}% - 35px)`, transform: 'translate(-50%, -100%)' }}
+        className="absolute z-30 transition-all pointer-events-none"
+        style={{ 
+          left: `${bot.x}%`, 
+          top: `calc(${bot.y}% - 28px)`, 
+          transform: 'translate(-50%, -100%)',
+          transitionDuration: '6000ms',
+          transitionTimingFunction: 'linear' 
+        }}
       >
         <div className="bg-slate-800 text-white text-[9px] px-2 py-1 rounded shadow-lg whitespace-nowrap flex items-center space-x-1">
-          <span className="font-semibold">{bot.status}</span>
+          <span className="font-semibold tracking-wide uppercase">{bot.status}</span>
         </div>
         <div className="w-1.5 h-1.5 bg-slate-800 transform rotate-45 mx-auto -mt-1"></div>
       </div>
@@ -235,7 +294,7 @@ function BotIcon({ bot }: { bot: BotState }) {
           left: `${bot.x}%`, 
           top: `${bot.y}%`, 
           transform: 'translate(-50%, -50%)',
-          transitionDuration: '5000ms',
+          transitionDuration: '6000ms',
           transitionTimingFunction: 'linear'
         }}
       >
