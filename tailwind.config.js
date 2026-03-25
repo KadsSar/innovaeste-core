@@ -13,6 +13,15 @@ export default {
       colors: {
         'accent-orange': '#f59e0b',
         'dark-forest': '#1a2e28',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        }
+      },
+      animation: {
+        marquee: 'marquee 60s linear infinite',
       }
     },
   },

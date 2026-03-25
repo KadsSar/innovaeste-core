@@ -1,5 +1,6 @@
 
 import Section1 from '../components/Section1';
+import SectionExperiences from '../components/SectionExperiences';
 import Section2 from '../components/Section2';
 import Section3 from '../components/Section3';
 import Section4 from '../components/Section4';
@@ -10,6 +11,7 @@ export default function LandingPage() {
   return (
     <div className="max-w-7xl mx-auto bg-white rounded-[2rem] overflow-hidden shadow-2xl my-8 font-sans">
       <Section1 />
+      <SectionExperiences />
       <Section2 />
       <Section3 />
       <Section4 />
