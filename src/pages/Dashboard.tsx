@@ -1,4 +1,4 @@
-import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2, ChevronLeft } from 'lucide-react';
+import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2, ChevronLeft, Server, Wifi, Battery, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import LiveHotelMap from '../components/LiveHotelMap';
 
@@ -26,12 +26,75 @@ export default function Dashboard() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-orange"></span>
             </span>
-            <span>System Online: Operational</span>
+            <span>System Online</span>
           </div>
         </header>
 
-        {/* Section 2: AI Request Terminal */}
-        <section className="bg-orange-50/50 border border-orange-100/50 rounded-2xl p-6 shadow-sm">
+        {/* Section 1.5: Interactive Hardware & Network Health Bar */}
+        <div className="flex w-full flex-col md:flex-row items-center justify-between px-6 py-3 bg-white border border-slate-200 rounded-xl text-sm shadow-sm">
+          
+          <div className="flex items-center space-x-3 w-full md:w-auto p-2 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer group">
+            <Server className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
+            <span className="text-slate-600 font-medium">Main Server Ping: <span className="text-slate-800">12ms</span></span>
+            <div className="flex space-x-0.5 ml-2 items-end h-3">
+              <div className="w-1 h-2 bg-emerald-500 rounded-full"></div>
+              <div className="w-1 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
+              <div className="w-1 h-1.5 bg-emerald-500 rounded-full"></div>
+            </div>
+          </div>
+
+          <div className="hidden md:block w-px h-6 bg-slate-200"></div>
+
+          <div className="flex items-center space-x-3 w-full md:w-auto p-2 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer group">
+            <Wifi className="w-4 h-4 text-slate-400 group-hover:text-emerald-500 transition-colors" />
+            <span className="text-slate-600 font-medium">Guest Network: <span className="text-slate-800">100% Uptime</span></span>
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse ml-2"></div>
+          </div>
+
+          <div className="hidden md:block w-px h-6 bg-slate-200"></div>
+
+          <div className="flex items-center space-x-3 w-full md:w-auto p-2 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer group">
+            <Battery className="w-4 h-4 text-slate-400 group-hover:text-orange-500 transition-colors" />
+            <span className="text-slate-600 font-medium">Fleet Power: <span className="text-slate-800">88%</span></span>
+            <div className="w-24 h-2 bg-slate-100 rounded-full overflow-hidden ml-2 ring-1 ring-slate-200 inset-ring">
+              <div className="w-[88%] h-full bg-orange-400"></div>
+            </div>
+          </div>
+
+        </div>
+
+        {/* Section 2: AI Request Terminal & ROI Analytics */}
+        <section className="bg-orange-50/30 border border-orange-100/80 rounded-2xl p-6 shadow-sm">
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+              <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold group-hover:text-accent-orange transition-colors">Avg AI Response Time</div>
+              <div className="text-2xl font-bold text-slate-800 mt-1">1.2s</div>
+              <div className="text-xs text-emerald-600 mt-1 flex items-center font-medium">
+                <TrendingUp className="w-3 h-3 mr-1" />
+                ↑ 30% faster than human routing
+              </div>
+            </div>
+            
+            <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+              <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold group-hover:text-accent-orange transition-colors">Tasks Automated Today</div>
+              <div className="text-2xl font-bold text-slate-800 mt-1">142</div>
+              <div className="text-xs text-slate-500 mt-1 flex items-center">
+                <CheckCircle2 className="w-3 h-3 mr-1 text-emerald-500" />
+                Zero routing errors
+              </div>
+            </div>
+
+            <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+              <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold group-hover:text-accent-orange transition-colors">Staff Hours Saved</div>
+              <div className="text-2xl font-bold text-slate-800 mt-1">4.5 hrs</div>
+              <div className="text-xs text-orange-500 font-medium mt-1 flex items-center">
+                <Clock className="w-3 h-3 mr-1" />
+                Equivalent to 0.5 shifts
+              </div>
+            </div>
+          </div>
+
           <div className="flex items-center space-x-2 mb-6">
             <Sparkles className="w-5 h-5 text-accent-orange" />
             <h2 className="text-xl font-semibold text-slate-800">Simulate Guest Request</h2>
