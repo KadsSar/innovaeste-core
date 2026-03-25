@@ -68,9 +68,6 @@ export default function Section1() {
           />
           
           <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <h2 className="font-serif text-white text-5xl md:text-7xl leading-[1.1] mb-6 drop-shadow-lg text-center">
-              Modern<br />Residences
-            </h2>
             <Link to="/loading" className="pointer-events-auto inline-block bg-accent-orange text-white font-sans text-[11px] font-bold uppercase tracking-widest py-4 px-8 rounded-full shadow-[0_6px_0_#b45309,0_15px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_4px_0_#b45309,0_10px_15px_rgba(0,0,0,0.2)] hover:translate-y-[2px] active:shadow-[0_0px_0_#b45309,0_0px_0px_rgba(0,0,0,0)] active:translate-y-[6px] transition-all duration-150 outline-none focus:outline-none text-center">
               Request Demo
             </Link>
