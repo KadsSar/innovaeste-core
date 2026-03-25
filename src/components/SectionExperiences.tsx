@@ -23,21 +23,41 @@ export default function SectionExperiences() {
         Our Packages and Resort Experiences are crafted personally for you
       </h2>
       <div className="flex w-full overflow-hidden whitespace-nowrap">
-        {/* The marquee track containing duplicated sequences */}
-        <div className="flex gap-6 animate-marquee w-max">
-          {[...experiences, ...experiences].map((exp, index) => (
+        {/* Track 1 */}
+        <div className="flex gap-6 min-w-max animate-infinite-scroll">
+          {experiences.map((exp, index) => (
             <div 
-              key={index}
-              className="flex-shrink-0 relative overflow-hidden rounded-2xl shadow-lg border border-slate-100 h-[400px] w-[320px] aspect-[4/5] bg-slate-100 group cursor-pointer"
+              key={`t1-${index}`}
+              className="flex-shrink-0 relative overflow-hidden rounded-2xl shadow-lg border border-slate-100 h-[400px] w-[320px] bg-slate-100 group cursor-pointer"
             >
               <img 
                 src={exp.img} 
                 alt={exp.label} 
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-90"></div>
-              <div className="absolute bottom-0 inset-x-0 p-6 flex items-end justify-center">
-                <p className="text-center text-sm font-sans tracking-widest uppercase font-semibold text-white/95">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-12">
+                <p className="text-center text-sm font-sans tracking-widest uppercase font-medium text-white shadow-sm">
+                  {exp.label}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Track 2 (Duplicate) */}
+        <div className="flex gap-6 min-w-max animate-infinite-scroll ml-6">
+          {experiences.map((exp, index) => (
+            <div 
+              key={`t2-${index}`}
+              className="flex-shrink-0 relative overflow-hidden rounded-2xl shadow-lg border border-slate-100 h-[400px] w-[320px] bg-slate-100 group cursor-pointer"
+            >
+              <img 
+                src={exp.img} 
+                alt={exp.label} 
+                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-12">
+                <p className="text-center text-sm font-sans tracking-widest uppercase font-medium text-white shadow-sm">
                   {exp.label}
                 </p>
               </div>

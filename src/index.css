@@ -11,4 +11,13 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  .animate-infinite-scroll {
+    animation: infinite-scroll 60s linear infinite;
+  }
+}
+
+@keyframes infinite-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% - 1.5rem)); }
 }
