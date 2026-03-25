@@ -62,7 +62,7 @@ export default function Section1() {
           }}
         >
           <img 
-            src="/images/hero.png" 
+            src="/16.png" 
             alt="Modern futuristic building" 
             className="w-full h-full object-cover"
           />
