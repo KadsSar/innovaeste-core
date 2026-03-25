@@ -255,34 +255,32 @@ export default function LiveHotelMap() {
         </div>
 
         {/* Orthogonal Wooden Boardwalks */}
-        {/* SVG Outer Border (Dark Brown Wood Edge) */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-          <path d="M 8% 50% L 90% 50%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
-          <path d="M 25% 50% L 25% 15%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
-          <path d="M 45% 50% L 45% 15%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
-          <path d="M 65% 50% L 65% 15%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
-          <path d="M 85% 50% L 85% 15%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
-          <path d="M 40% 50% L 40% 45%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
-          <path d="M 60% 50% L 60% 55%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
-          <path d="M 80% 50% L 80% 45%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
-          <path d="M 30% 50% L 30% 85%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
-          <path d="M 55% 50% L 55% 85%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
-          <path d="M 80% 50% L 80% 85%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" fill="none" />
+          <line x1="8%" y1="50%" x2="90%" y2="50%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
+          <line x1="25%" y1="50%" x2="25%" y2="15%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
+          <line x1="45%" y1="50%" x2="45%" y2="15%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
+          <line x1="65%" y1="50%" x2="65%" y2="15%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
+          <line x1="85%" y1="50%" x2="85%" y2="15%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
+          <line x1="40%" y1="50%" x2="40%" y2="45%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
+          <line x1="60%" y1="50%" x2="60%" y2="55%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
+          <line x1="80%" y1="50%" x2="80%" y2="45%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
+          <line x1="30%" y1="50%" x2="30%" y2="85%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
+          <line x1="55%" y1="50%" x2="55%" y2="85%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
+          <line x1="80%" y1="50%" x2="80%" y2="85%" stroke="#8b6b47" strokeWidth="22" strokeLinecap="square" />
         </svg>
 
-        {/* SVG Inner Path (Light Brown Wooden Planks) */}
         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-          <path d="M 8% 50% L 90% 50%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
-          <path d="M 25% 50% L 25% 15%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
-          <path d="M 45% 50% L 45% 15%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
-          <path d="M 65% 50% L 65% 15%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
-          <path d="M 85% 50% L 85% 15%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
-          <path d="M 40% 50% L 40% 45%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
-          <path d="M 60% 50% L 60% 55%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
-          <path d="M 80% 50% L 80% 45%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
-          <path d="M 30% 50% L 30% 85%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
-          <path d="M 55% 50% L 55% 85%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
-          <path d="M 80% 50% L 80% 85%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" fill="none" />
+          <line x1="8%" y1="50%" x2="90%" y2="50%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
+          <line x1="25%" y1="50%" x2="25%" y2="15%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
+          <line x1="45%" y1="50%" x2="45%" y2="15%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
+          <line x1="65%" y1="50%" x2="65%" y2="15%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
+          <line x1="85%" y1="50%" x2="85%" y2="15%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
+          <line x1="40%" y1="50%" x2="40%" y2="45%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
+          <line x1="60%" y1="50%" x2="60%" y2="55%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
+          <line x1="80%" y1="50%" x2="80%" y2="45%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
+          <line x1="30%" y1="50%" x2="30%" y2="85%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
+          <line x1="55%" y1="50%" x2="55%" y2="85%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
+          <line x1="80%" y1="50%" x2="80%" y2="85%" stroke="#c29f79" strokeWidth="16" strokeLinecap="square" strokeDasharray="5 1" />
         </svg>
 
         {/* Hand-drawn organic tree clumps (multiple circles grouped) */}
