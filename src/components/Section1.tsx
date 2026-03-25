@@ -52,17 +52,19 @@ export default function Section1() {
 
       {/* Hero Image & Overlaps */}
       <div className="relative z-10">
-        <div className="relative w-full h-[600px] overflow-hidden shadow-2xl bg-white/10 backdrop-blur-sm">
+        <div 
+          className="relative w-full h-[600px]"
+          style={{
+            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%), linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 60%, transparent 100%)',
+            WebkitMaskComposite: 'source-in',
+            maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%), linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 60%, transparent 100%)',
+            maskComposite: 'intersect'
+          }}
+        >
           <img 
             src="/images/hero.png" 
             alt="Modern futuristic building" 
             className="w-full h-full object-cover"
-            style={{
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%), linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 85%, transparent 100%)',
-              WebkitMaskComposite: 'source-in',
-              maskImage: 'linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%), linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 85%, transparent 100%)',
-              maskComposite: 'intersect'
-            }}
           />
           
           {/* Bottom left overlap inside the image boundary but could stick out */}
