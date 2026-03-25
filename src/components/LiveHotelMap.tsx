@@ -48,8 +48,46 @@ export default function LiveHotelMap() {
     id: 'B', name: 'Maintenance Unit', x: 8, y: 50, status: 'CHARGING', color: 'bg-blue-500 text-white', icon: <Wrench size={16} />
   });
 
+  const [randomRequests, setRandomRequests] = useState<Record<string, string>>({});
+
   useEffect(() => {
     let mounted = true;
+
+    // Random Chatter System
+    const generateRandomChatter = async () => {
+      const phrases = [
+        "Extra towels please 🧖‍♀️",
+        "Send some champagne! 🍾",
+        "Wi-Fi is disconnected 📶",
+        "Need an iron please 👔",
+        "Late checkout request ⏰",
+        "More coffee pods ☕",
+        "Pool towels needed 🏊",
+        "Dinner reservations? 🍽️"
+      ];
+      const nodeIds = ['villa-sol', 'villa-luna', 'villa-estrella', 'villa-cielo', 'spa', 'gym', 'dining', 'villa-flora', 'villa-fauna', 'villa-mar'];
+      
+      while (mounted) {
+        await wait(2000 + Math.random() * 3000);
+        if (!mounted) return;
+        
+        const randomRoom = nodeIds[Math.floor(Math.random() * nodeIds.length)];
+        const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+        
+        setRandomRequests(prev => ({ ...prev, [randomRoom]: randomPhrase }));
+        
+        setTimeout(() => {
+          if (mounted) {
+            setRandomRequests(prev => {
+              const next = { ...prev };
+              delete next[randomRoom];
+              return next;
+            });
+          }
+        }, 5000 + Math.random() * 3000);
+      }
+    };
+    generateRandomChatter();
 
     const setRequest = (id: string, request: string | null) => {
       setNodes(prev => ({
@@ -275,9 +313,9 @@ export default function LiveHotelMap() {
               absolute -top-20 left-1/2 -translate-x-1/2 w-max max-w-[180px]
               bg-white text-slate-700 px-3 py-2 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.15)] border border-gray-100
               text-[10px] sm:text-xs font-semibold text-center transition-all duration-300 origin-bottom z-40
-              ${node.request ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4 pointer-events-none'}
+              ${node.request || randomRequests[node.id] ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-50 translate-y-4 pointer-events-none'}
             `}>
-              {node.request}
+              {node.request || randomRequests[node.id]}
               <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-b border-r border-gray-100 transform rotate-45"></div>
             </div>
 
