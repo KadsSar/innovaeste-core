@@ -6,6 +6,11 @@
   background-color: #0096C7 !important;
 }
 
+.text-stroke-white {
+  -webkit-text-stroke: 2px white;
+  text-stroke: 2px white;
+}
+
 @layer utilities {
   /* Hide scrollbar for tabs */
   .scrollbar-hide::-webkit-scrollbar {

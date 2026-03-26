@@ -45,7 +45,7 @@ export default function Section1() {
 
       {/* Hero Title Container */}
       <div className="relative pt-8 px-8 -mb-28 z-0 overflow-hidden" style={{ height: '240px' }}>
-        <h1 className="text-[15vw] leading-none font-serif font-light text-slate-800 text-center uppercase tracking-tight relative -top-8">
+        <h1 className="text-stroke-white text-[15vw] leading-none font-serif font-light text-slate-800 text-center uppercase tracking-tight relative -top-8">
           Innovaeste
         </h1>
       </div>
