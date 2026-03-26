@@ -18,8 +18,8 @@ function HeroTitle() {
   return (
     <div
       ref={titleRef}
-      className="relative pt-8 px-8 -mb-28 z-20 overflow-visible cursor-default select-none"
-      style={{ height: '240px' }}
+      className="absolute inset-x-0 top-0 z-20 pt-8 px-8 cursor-default select-none"
+      style={{ height: '45%' }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -104,10 +104,10 @@ export default function Section1() {
         </div>
       </nav>
 
-      <HeroTitle />
 
       {/* Hero Image & Overlaps */}
       <div className="relative z-10">
+        <HeroTitle />
         <div 
           className="relative w-full h-[600px]"
           style={{
