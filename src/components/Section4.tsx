@@ -35,7 +35,7 @@ export default function Section4() {
   ];
 
   return (
-    <div className="relative w-full px-20 py-24 pb-32" >
+    <div className="relative w-full px-20 py-24 pb-32" style={{ backgroundColor: '#0096C7' }}>
       {/* Heading Flex Container */}
       <div className="flex justify-between items-end mb-16 px-4 md:px-10">
         <h2 className="font-serif text-[42px] leading-tight text-slate-800 w-1/2">
