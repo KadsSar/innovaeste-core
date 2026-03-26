@@ -18,7 +18,7 @@ function HeroTitle() {
   return (
     <div
       ref={titleRef}
-      className="relative pt-8 px-8 -mb-28 z-0 overflow-visible cursor-default select-none"
+      className="relative pt-8 px-8 -mb-28 z-20 overflow-visible cursor-default select-none"
       style={{ height: '240px' }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
