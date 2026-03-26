@@ -10,7 +10,7 @@ export default function Section3() {
   ];
 
   return (
-    <div className="relative w-full px-20 py-24 border-t border-gray-100" style={{ backgroundColor: '#f5f0ea' }}>
+    <div className="relative w-full px-20 py-24 border-t border-gray-100" >
       {/* Heading & Video Button */}
       <div className="flex justify-between items-start mb-12">
         <h2 className="font-serif text-5xl text-slate-800 leading-tight w-1/2">

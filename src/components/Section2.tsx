@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function Section2() {
   return (
-    <div className="relative w-full px-20 py-24" style={{ backgroundColor: '#f5f0ea' }}>
+    <div className="relative w-full px-20 py-24" >
       {/* Headings */}
       <div className="mb-20">
         <h2 className="font-serif text-6xl text-slate-800 tracking-tight">Architecture</h2>

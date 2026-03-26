@@ -5,7 +5,7 @@ import LiveHotelMap from '../components/LiveHotelMap';
 export default function Dashboard() {
   return (
     <div className="min-h-screen font-sans text-slate-800 p-4 sm:p-8" style={{ backgroundColor: '#e8ddd1' }}>
-      <div className="max-w-7xl mx-auto rounded-[2rem] p-6 sm:p-10 shadow-2xl space-y-10" style={{ backgroundColor: '#f5f0ea' }}>
+      <div className="max-w-7xl mx-auto bg-[#F9F8F3] rounded-[2rem] p-6 sm:p-10 shadow-2xl space-y-10">
         
         {/* Section 1: Header */}
         <header className="flex justify-between items-center border-b border-gray-100 pb-6">

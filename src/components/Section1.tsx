@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function Section1() {
   return (
-    <div className="relative w-full text-slate-800" style={{ backgroundColor: '#f5f0ea' }}>
+    <div className="relative w-full text-slate-800" >
       {/* Navbar */}
       <nav className="flex justify-between items-center py-6 px-8">
         {/* Left Links */}
