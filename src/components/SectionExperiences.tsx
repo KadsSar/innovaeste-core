@@ -18,7 +18,7 @@ const experiences = [
 
 export default function SectionExperiences() {
   return (
-    <section className="bg-cream py-12 px-8 overflow-hidden">
+    <section className="py-12 px-8 overflow-hidden" style={{ backgroundColor: '#f5f0ea' }}>
       <h2 className="text-center text-4xl font-serif text-slate-800 mb-8 mx-auto max-w-4xl leading-relaxed">
         Our Packages and Resort Experiences are crafted personally for you
       </h2>

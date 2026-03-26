@@ -10,7 +10,7 @@ export default function Section3() {
   ];
 
   return (
-    <div className="relative w-full bg-cream px-20 py-24 border-t border-gray-100">
+    <div className="relative w-full px-20 py-24 border-t border-gray-100" style={{ backgroundColor: '#f5f0ea' }}>
       {/* Heading & Video Button */}
       <div className="flex justify-between items-start mb-12">
         <h2 className="font-serif text-5xl text-slate-800 leading-tight w-1/2">
@@ -32,7 +32,7 @@ export default function Section3() {
             className={`px-6 py-2 rounded-full text-[11px] font-sans transition-colors ${
               idx === 0 
                 ? 'bg-slate-800 text-white' 
-                : 'bg-cream border border-gray-200 text-slate-500 hover:bg-gray-50'
+                : 'bg-white border border-gray-200 text-slate-500 hover:bg-gray-50'
             }`}
           >
             {tab}
