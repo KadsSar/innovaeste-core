@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.app-container {
+  background-color: #F9F8F3 !important;
+}
+
 @layer utilities {
   /* Hide scrollbar for tabs */
   .scrollbar-hide::-webkit-scrollbar {
