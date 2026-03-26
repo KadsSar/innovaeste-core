@@ -4,8 +4,8 @@ import LiveHotelMap from '../components/LiveHotelMap';
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-slate-800 font-sans text-slate-800 p-4 sm:p-8">
-      <div className="max-w-7xl mx-auto bg-white rounded-[2rem] p-6 sm:p-10 shadow-2xl space-y-10">
+    <div className="min-h-screen font-sans text-slate-800 p-4 sm:p-8" style={{ backgroundColor: '#e8ddd1' }}>
+      <div className="max-w-7xl mx-auto rounded-[2rem] p-6 sm:p-10 shadow-2xl space-y-10" style={{ backgroundColor: '#faf8f5' }}>
         
         {/* Section 1: Header */}
         <header className="flex justify-between items-center border-b border-gray-100 pb-6">
@@ -31,7 +31,7 @@ export default function Dashboard() {
         </header>
 
         {/* Section 1.5: Interactive Hardware & Network Health Bar */}
-        <div className="flex w-full flex-col md:flex-row items-center justify-between px-6 py-3 bg-white border border-slate-200 rounded-xl text-sm shadow-sm">
+        <div className="flex w-full flex-col md:flex-row items-center justify-between px-6 py-3 border border-slate-200 rounded-xl text-sm shadow-sm" style={{ backgroundColor: '#fdf9f4' }}>
           
           <div className="flex items-center space-x-3 w-full md:w-auto p-2 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer group">
             <Server className="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" />
@@ -67,7 +67,7 @@ export default function Dashboard() {
         <section className="bg-orange-50/30 border border-orange-100/80 rounded-2xl p-6 shadow-sm">
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+            <div className="border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group" style={{ backgroundColor: '#fdf9f4' }}>
               <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold group-hover:text-accent-orange transition-colors">Avg AI Response Time</div>
               <div className="text-2xl font-bold text-slate-800 mt-1">1.2s</div>
               <div className="text-xs text-emerald-600 mt-1 flex items-center font-medium">
@@ -76,7 +76,7 @@ export default function Dashboard() {
               </div>
             </div>
             
-            <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+            <div className="border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group" style={{ backgroundColor: '#fdf9f4' }}>
               <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold group-hover:text-accent-orange transition-colors">Tasks Automated Today</div>
               <div className="text-2xl font-bold text-slate-800 mt-1">142</div>
               <div className="text-xs text-slate-500 mt-1 flex items-center">
@@ -85,7 +85,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="bg-white border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group">
+            <div className="border border-slate-200 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer group" style={{ backgroundColor: '#fdf9f4' }}>
               <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold group-hover:text-accent-orange transition-colors">Staff Hours Saved</div>
               <div className="text-2xl font-bold text-slate-800 mt-1">4.5 hrs</div>
               <div className="text-xs text-orange-500 font-medium mt-1 flex items-center">
@@ -103,7 +103,7 @@ export default function Dashboard() {
             <input 
               type="text" 
               placeholder="e.g., I spilled coffee in room 402, send a robot with towels" 
-              className="flex-1 bg-white border border-gray-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-200 transition-all font-sans shadow-inner shadow-gray-50"
+              className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-200 transition-all font-sans shadow-inner" style={{ backgroundColor: '#fdf9f4' }}
             />
             <button className="flex items-center justify-center space-x-2 bg-accent-orange hover:bg-orange-500 active:bg-orange-600 text-white px-8 py-3 rounded-xl font-medium transition-all shadow-md hover:shadow-orange-500/20 active:translate-y-[1px]">
               <span>Process Request</span>
@@ -115,7 +115,7 @@ export default function Dashboard() {
         {/* Section 3: Fleet & Staff Status Grid */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1 */}
-          <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow">
+          <div className="border border-gray-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow" style={{ backgroundColor: '#fdf9f4' }}>
             <div className="flex items-center space-x-3 mb-4 text-slate-600">
               <div className="p-2 bg-gray-50 rounded-lg border border-gray-100">
                 <Bot className="w-5 h-5 text-slate-500" />
@@ -129,7 +129,7 @@ export default function Dashboard() {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white border border-orange-100/80 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden hover:shadow-[0_8px_30px_rgba(245,158,11,0.08)] transition-shadow">
+          <div className="border border-orange-100/80 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden hover:shadow-[0_8px_30px_rgba(245,158,11,0.08)] transition-shadow" style={{ backgroundColor: '#fdf9f4' }}>
             <div className="absolute top-0 right-0 w-32 h-32 bg-orange-100/50 blur-3xl rounded-full"></div>
             <div className="flex items-center space-x-3 mb-4 text-slate-600 relative z-10">
               <div className="p-2 bg-orange-50 rounded-lg border border-orange-100/50">
@@ -144,7 +144,7 @@ export default function Dashboard() {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white border border-gray-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow">
+          <div className="border border-gray-100 rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] transition-shadow" style={{ backgroundColor: '#fdf9f4' }}>
             <div className="flex items-center space-x-3 mb-4 text-slate-600">
               <div className="p-2 bg-gray-50 rounded-lg border border-gray-100">
                 <Sparkles className="w-5 h-5 text-slate-500" />
@@ -162,8 +162,8 @@ export default function Dashboard() {
         <LiveHotelMap />
 
         {/* Section 4: Live Operations Feed */}
-        <section className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-          <div className="p-6 border-b border-gray-100 bg-gray-50/50">
+        <section className="border border-gray-100 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)]" style={{ backgroundColor: '#fdf9f4' }}>
+          <div className="p-6 border-b border-gray-100" style={{ backgroundColor: '#f5efe8' }}>
             <h2 className="text-xl font-semibold text-slate-800">Live Operations Feed</h2>
           </div>
           <div className="overflow-x-auto">

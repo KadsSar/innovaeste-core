@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    background-color: #e8ddd1;
+  }
+}
+
+@layer utilities {
+  /* Override bg-white to cream site-wide */
+  .bg-white {
+    background-color: #faf8f5 !important;
+  }
+}
+
 @layer utilities {
   /* Hide scrollbar for tabs */
   .scrollbar-hide::-webkit-scrollbar {
