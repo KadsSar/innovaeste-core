@@ -1,4 +1,65 @@
 import { Link } from 'react-router-dom';
+import { useRef, useState } from 'react';
+
+function HeroTitle() {
+  const titleRef = useRef<HTMLDivElement>(null);
+  const [cursor, setCursor] = useState({ x: -999, y: -999 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = titleRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    setCursor({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleMouseLeave = () => setCursor({ x: -999, y: -999 });
+
+  const sharedClass = 'text-[15vw] leading-none font-serif font-light text-slate-800 text-center uppercase tracking-tight';
+
+  return (
+    <div
+      ref={titleRef}
+      className="relative pt-8 px-8 -mb-28 z-0 overflow-visible cursor-default select-none"
+      style={{ height: '240px' }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      {/* Base layer — subtle white stroke, no glow */}
+      <h1
+        className={sharedClass}
+        style={{
+          WebkitTextStroke: '1.5px rgba(255,255,255,0.65)',
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          top: '-2rem',
+        }}
+      >
+        Innovaeste
+      </h1>
+
+      {/* Glow layer — full glow, masked to circle at cursor */}
+      <h1
+        className={sharedClass}
+        style={{
+          WebkitTextStroke: '1.5px white',
+          filter: 'drop-shadow(0 0 10px rgba(255,255,255,1)) drop-shadow(0 0 28px rgba(200,240,255,0.9))',
+          WebkitMaskImage: `radial-gradient(circle 150px at ${cursor.x}px ${cursor.y}px, black 10%, transparent 90%)`,
+          maskImage: `radial-gradient(circle 150px at ${cursor.x}px ${cursor.y}px, black 10%, transparent 90%)`,
+          position: 'absolute',
+          inset: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          top: '-2rem',
+        }}
+      >
+        Innovaeste
+      </h1>
+    </div>
+  );
+}
 
 export default function Section1() {
   return (
@@ -43,12 +104,7 @@ export default function Section1() {
         </div>
       </nav>
 
-      {/* Hero Title Container */}
-      <div className="relative pt-8 px-8 -mb-28 z-0 overflow-hidden" style={{ height: '240px' }}>
-        <h1 className="text-stroke-white text-[15vw] leading-none font-serif font-light text-slate-800 text-center uppercase tracking-tight relative -top-8">
-          Innovaeste
-        </h1>
-      </div>
+      <HeroTitle />
 
       {/* Hero Image & Overlaps */}
       <div className="relative z-10">
