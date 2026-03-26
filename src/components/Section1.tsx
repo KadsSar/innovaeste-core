@@ -55,8 +55,8 @@ export default function Section1() {
         <div 
           className="relative w-full h-[600px]"
           style={{
-            WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
-            maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)'
+            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 60%, transparent 100%)',
+            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 60%, transparent 100%)'
           }}
         >
           <img 
