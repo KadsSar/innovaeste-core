@@ -13,6 +13,8 @@ export default {
       colors: {
         'accent-orange': '#f59e0b',
         'dark-forest': '#1a2e28',
+        'cream': '#faf8f5',
+        'cream-dark': '#e8ddd1',
       },
       keyframes: {
         marquee: {

@@ -6,7 +6,7 @@ export default function Section5() {
   ];
 
   return (
-    <div className="relative w-full bg-white">
+    <div className="relative w-full bg-cream">
       {/* The Arches (z-10 relative) */}
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 px-16 md:px-32 max-w-6xl mx-auto">
         {arches.map((img, idx) => (

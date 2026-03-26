@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 export default function Section1() {
   return (
-    <div className="relative w-full text-slate-800 bg-white">
+    <div className="relative w-full text-slate-800 bg-cream">
       {/* Navbar */}
       <nav className="flex justify-between items-center py-6 px-8">
         {/* Left Links */}
@@ -34,7 +34,7 @@ export default function Section1() {
           <div className="text-[11px] font-sans font-light text-gray-500">
             EN | UA
           </div>
-          <button className="bg-white border hover:bg-gray-50 transition-colors border-gray-200 rounded-full px-4 py-2 text-[11px] font-sans flex items-center shadow-sm">
+          <button className="bg-cream border hover:bg-gray-50 transition-colors border-gray-200 rounded-full px-4 py-2 text-[11px] font-sans flex items-center shadow-sm">
             <span className="mr-2">+92 319 849 2066</span>
             <div className="w-5 h-5 bg-accent-orange rounded-full flex items-center justify-center text-white text-[10px]">
               📞
@@ -74,7 +74,7 @@ export default function Section1() {
         </div>
 
         {/* Absolute floating box on bottom right hanging halfway off */}
-        <div className="absolute -bottom-16 right-16 z-20 w-[420px] bg-white/90 backdrop-blur-md rounded-[2rem] p-8 shadow-2xl border border-white/50">
+        <div className="absolute -bottom-16 right-16 z-20 w-[420px] bg-cream/90 backdrop-blur-md rounded-[2rem] p-8 shadow-2xl border border-white/50">
           <div className="flex justify-between items-start mb-6">
             <h3 className="font-serif text-3xl text-slate-800">Crafted with<br/>Precision</h3>
             <div className="flex gap-2">

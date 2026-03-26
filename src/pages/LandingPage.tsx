@@ -9,7 +9,7 @@ import Section6 from '../components/Section6';
 
 export default function LandingPage() {
   return (
-    <div className="max-w-7xl mx-auto rounded-[2rem] overflow-hidden shadow-2xl my-8 font-sans" style={{ backgroundColor: '#faf8f5' }}>
+    <div className="max-w-7xl mx-auto rounded-[2rem] overflow-hidden shadow-2xl my-8 font-sans" style={{  }}>
       <Section1 />
       <SectionExperiences />
       <Section2 />
