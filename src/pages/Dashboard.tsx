@@ -8,6 +8,9 @@ export default function Dashboard() {
   const [requestText, setRequestText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [requests, setRequests] = useState<any[]>([]);
+  const [showAllRequests, setShowAllRequests] = useState(false);
+
+  const displayedRequests = showAllRequests ? requests : requests.slice(0, 5);
 
   const fetchRequests = async () => {
     const { data, error } = await supabase
@@ -229,8 +232,16 @@ export default function Dashboard() {
 
       {/* Section 4: Live Operations Feed */}
       <section className="border border-gray-100 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)]" style={{ backgroundColor: '#fdf9f4' }}>
-        <div className="p-6 border-b border-gray-100" style={{ backgroundColor: '#f5efe8' }}>
+        <div className="flex justify-between items-center p-6 border-b border-gray-100" style={{ backgroundColor: '#f5efe8' }}>
           <h2 className="text-xl font-semibold text-slate-800">Live Operations Feed</h2>
+          {requests.length > 5 && (
+            <button
+              onClick={() => setShowAllRequests(!showAllRequests)}
+              className="text-sm font-medium text-accent-orange hover:text-orange-500 transition-colors bg-white px-4 py-2 rounded-full shadow-sm border border-orange-100 hover:shadow"
+            >
+              {showAllRequests ? "Show Less" : "View All"}
+            </button>
+          )}
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
@@ -244,7 +255,7 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody className="text-sm">
-              {requests.map((req) => (
+              {displayedRequests.map((req) => (
                 <tr key={req.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
                   <td className="py-4 px-6 text-slate-500">
                     {new Date(req.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
