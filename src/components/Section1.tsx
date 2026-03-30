@@ -21,7 +21,7 @@ function HeroTitle() {
       {/* Base: always-visible white outlined letters */}
       <h1
         className="text-[15vw] leading-none font-serif font-light text-center uppercase tracking-tight"
-        style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.7)' }}
+        style={{ color: 'transparent', WebkitTextStroke: '2.5px rgba(255,255,255,0.7)' }}
       >
         Innovaeste
       </h1>
@@ -31,7 +31,7 @@ function HeroTitle() {
         className="text-[15vw] leading-none font-serif font-light text-center uppercase tracking-tight"
         style={{
           color: 'transparent',
-          WebkitTextStroke: '2px white',
+          WebkitTextStroke: '3px white',
           filter: 'drop-shadow(0 0 14px rgba(255,255,255,1)) drop-shadow(0 0 30px rgba(180,230,255,0.9))',
           WebkitMaskImage: `radial-gradient(circle 160px at ${cursor.x}px ${cursor.y}px, black 0%, transparent 80%)`,
           maskImage: `radial-gradient(circle 160px at ${cursor.x}px ${cursor.y}px, black 0%, transparent 80%)`,
@@ -90,7 +90,7 @@ export default function Section1() {
       {/* Hero: Title on top, Image behind */}
       <div className="relative">
         {/* Title — sits above the image in the normal flow, overlaps image via negative margin */}
-        <div className="relative z-20 px-8 -mb-[12vw]">
+        <div className="relative z-20 px-8 -mb-[12vw] -translate-x-[2vw]">
           <HeroTitle />
         </div>
 
