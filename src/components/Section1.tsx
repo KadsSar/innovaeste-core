@@ -2,57 +2,40 @@ import { Link } from 'react-router-dom';
 import { useRef, useState } from 'react';
 
 function HeroTitle() {
-  const titleRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [cursor, setCursor] = useState({ x: -999, y: -999 });
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = titleRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    setCursor({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const r = ref.current?.getBoundingClientRect();
+    if (!r) return;
+    setCursor({ x: e.clientX - r.left, y: e.clientY - r.top });
   };
-
-  const handleMouseLeave = () => setCursor({ x: -999, y: -999 });
-
-  const sharedClass = 'text-[15vw] leading-none font-serif font-light text-slate-800 text-center uppercase tracking-tight';
 
   return (
     <div
-      ref={titleRef}
-      className="absolute inset-x-0 top-0 z-20 pt-8 px-8 cursor-default select-none"
-      style={{ height: '45%' }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      ref={ref}
+      onMouseMove={onMove}
+      onMouseLeave={() => setCursor({ x: -999, y: -999 })}
+      className="w-full select-none cursor-default overflow-visible"
     >
-      {/* Base layer — subtle white stroke, no glow */}
+      {/* Base: always-visible white outlined letters */}
       <h1
-        className={sharedClass}
-        style={{
-          WebkitTextStroke: '1.5px rgba(255,255,255,0.65)',
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          top: '-2rem',
-        }}
+        className="text-[15vw] leading-none font-serif font-light text-center uppercase tracking-tight"
+        style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.7)' }}
       >
         Innovaeste
       </h1>
 
-      {/* Glow layer — full glow, masked to circle at cursor */}
+      {/* Glow overlay: same text, masked to cursor circle */}
       <h1
-        className={sharedClass}
+        className="text-[15vw] leading-none font-serif font-light text-center uppercase tracking-tight"
         style={{
-          WebkitTextStroke: '1.5px white',
-          filter: 'drop-shadow(0 0 10px rgba(255,255,255,1)) drop-shadow(0 0 28px rgba(200,240,255,0.9))',
-          WebkitMaskImage: `radial-gradient(circle 150px at ${cursor.x}px ${cursor.y}px, black 10%, transparent 90%)`,
-          maskImage: `radial-gradient(circle 150px at ${cursor.x}px ${cursor.y}px, black 10%, transparent 90%)`,
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          top: '-2rem',
+          color: 'transparent',
+          WebkitTextStroke: '2px white',
+          filter: 'drop-shadow(0 0 14px rgba(255,255,255,1)) drop-shadow(0 0 30px rgba(180,230,255,0.9))',
+          WebkitMaskImage: `radial-gradient(circle 160px at ${cursor.x}px ${cursor.y}px, black 0%, transparent 80%)`,
+          maskImage: `radial-gradient(circle 160px at ${cursor.x}px ${cursor.y}px, black 0%, transparent 80%)`,
+          marginTop: '-1em',           // stack directly on top of base h1
         }}
       >
         Innovaeste
@@ -104,32 +87,39 @@ export default function Section1() {
         </div>
       </nav>
 
+      {/* Hero: Title on top, Image behind */}
+      <div className="relative">
+        {/* Title — sits above the image in the normal flow, overlaps image via negative margin */}
+        <div className="relative z-20 px-8 -mb-[12vw]">
+          <HeroTitle />
+        </div>
 
-      {/* Hero Image & Overlaps */}
-      <div className="relative z-10">
-        <HeroTitle />
-        <div 
-          className="relative w-full h-[600px]"
+        {/* Hero Image */}
+        <div
+          className="relative z-10 w-full h-[600px]"
           style={{
             WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 60%, transparent 100%)',
-            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 60%, transparent 100%)'
+            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, black 15%, black 60%, transparent 100%)',
           }}
         >
-          <img 
-            src="/16.png" 
-            alt="Modern futuristic building" 
+          <img
+            src="/16.png"
+            alt="Modern futuristic building"
             className="w-full h-full object-cover"
           />
         </div>
-        
-        {/* Floating CTA (Outside the Mask Container) */}
-        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center pointer-events-none z-30">
-          <Link to="/loading" className="pointer-events-auto inline-block bg-accent-orange text-white font-sans text-[11px] font-bold uppercase tracking-widest py-4 px-8 rounded-full shadow-[0_6px_0_#b45309,0_15px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_4px_0_#b45309,0_10px_15px_rgba(0,0,0,0.2)] hover:translate-y-[2px] active:shadow-[0_0px_0_#b45309,0_0px_0px_rgba(0,0,0,0)] active:translate-y-[6px] transition-all duration-150 outline-none focus:outline-none text-center">
+
+        {/* Floating CTA */}
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-30 pointer-events-none">
+          <Link
+            to="/loading"
+            className="pointer-events-auto inline-block bg-accent-orange text-white font-sans text-[11px] font-bold uppercase tracking-widest py-4 px-8 rounded-full shadow-[0_6px_0_#b45309,0_15px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_4px_0_#b45309,0_10px_15px_rgba(0,0,0,0.2)] hover:translate-y-[2px] active:shadow-none active:translate-y-[6px] transition-all duration-150 outline-none focus:outline-none"
+          >
             Request Demo
           </Link>
         </div>
 
-        {/* Absolute floating box on bottom right hanging halfway off */}
+        {/* Crafted with Precision card */}
         <div className="absolute -bottom-16 right-16 z-20 w-[420px] bg-white/90 backdrop-blur-md rounded-[2rem] p-8 shadow-2xl border border-white/50">
           <div className="flex justify-between items-start mb-6">
             <h3 className="font-serif text-3xl text-slate-800">Crafted with<br/>Precision</h3>
@@ -141,10 +131,10 @@ export default function Section1() {
           <div className="flex items-center justify-between border-t border-gray-200 pt-6">
             <div className="flex -space-x-3">
               <div className="w-10 h-10 rounded-full bg-gray-200 border-2 border-white shadow-sm overflow-hidden">
-                 <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100" alt="Agent 1" className="w-full h-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100" alt="Agent 1" className="w-full h-full object-cover" />
               </div>
               <div className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white shadow-sm overflow-hidden">
-                 <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=100&h=100" alt="Agent 2" className="w-full h-full object-cover" />
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=100&h=100" alt="Agent 2" className="w-full h-full object-cover" />
               </div>
               <div className="w-10 h-10 rounded-full bg-gray-100 border-2 border-white shadow-sm flex items-center justify-center text-[10px] font-sans text-slate-500">
                 +8
