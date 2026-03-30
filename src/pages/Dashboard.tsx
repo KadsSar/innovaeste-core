@@ -16,6 +16,25 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchRequests();
+
+    const channel = supabase
+      .channel('schema-db-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'service_requests'
+        },
+        () => {
+          fetchRequests();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const handleProcessRequest = async () => {
