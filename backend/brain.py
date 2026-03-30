@@ -30,6 +30,17 @@ while True:
         for task in tasks:
             print(f"🔔 NEW TASK DETECTED: '{task['guest_text']}'")
             
+            # --- STEP 1: TELL THE DASHBOARD WE ARE THINKING ---
+            supabase.table("service_requests").update({
+                "assigned_to": "AI Thinking...",
+                "status": "Assigning..."
+            }).eq("id", task["id"]).execute()
+            
+            # --- DRAMATIC PAUSE (2 SECONDS) ---
+            print("🧠 AI is analyzing request...")
+            time.sleep(2)
+
+            # --- STEP 2: MAKE THE FINAL DECISION ---
             assigned_to, new_status = route_task(task['guest_text'])
             print(f"🤖 Routing to: {assigned_to}...")
 
