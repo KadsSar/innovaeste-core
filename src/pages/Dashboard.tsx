@@ -1,12 +1,22 @@
 import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2, ChevronLeft, Server, Wifi, Battery, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import LiveHotelMap from '../components/LiveHotelMap';
 
 export default function Dashboard() {
   const [requestText, setRequestText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [requests, setRequests] = useState<any[]>([]);
+
+  const fetchRequests = async () => {
+    const { data } = await supabase.from('service_requests').select('*').order('created_at', { ascending: false });
+    if (data) setRequests(data);
+  };
+
+  useEffect(() => {
+    fetchRequests();
+  }, []);
 
   const handleProcessRequest = async () => {
     if (!requestText.trim()) return;
@@ -18,6 +28,7 @@ export default function Dashboard() {
         console.error('Error inserting request:', error);
       } else {
         setRequestText("");
+        fetchRequests();
       }
     } catch (err) {
       console.error('Unexpected error:', err);
@@ -210,38 +221,39 @@ export default function Dashboard() {
                 </tr>
               </thead>
               <tbody className="text-sm">
-                <tr className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
-                  <td className="py-4 px-6 text-slate-500">10:42 AM</td>
-                  <td className="py-4 px-6 font-medium text-slate-800">310</td>
-                  <td className="py-4 px-6 italic text-slate-600">"The Wi-Fi keeps dropping on my laptop."</td>
-                  <td className="py-4 px-6">
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-slate-700 border border-gray-200">
-                      IT / Network
-                    </span>
-                  </td>
-                  <td className="py-4 px-6">
-                    <div className="flex items-center space-x-2 text-accent-orange font-medium">
-                      <Clock className="w-4 h-4" />
-                      <span>In Progress</span>
-                    </div>
-                  </td>
-                </tr>
-                <tr className="hover:bg-gray-50/50 transition-colors">
-                  <td className="py-4 px-6 text-slate-500">10:15 AM</td>
-                  <td className="py-4 px-6 font-medium text-slate-800">402</td>
-                  <td className="py-4 px-6 italic text-slate-600">"I need two extra towels please."</td>
-                  <td className="py-4 px-6">
-                    <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-orange-50 text-accent-orange border border-orange-200">
-                      Robotics Unit 01
-                    </span>
-                  </td>
-                  <td className="py-4 px-6">
-                    <div className="flex items-center space-x-2 text-emerald-600 font-medium">
-                      <CheckCircle2 className="w-4 h-4" />
-                      <span>Resolved</span>
-                    </div>
-                  </td>
-                </tr>
+                {requests.map((req) => (
+                  <tr key={req.id} className="border-b border-gray-50 hover:bg-gray-50/50 transition-colors">
+                    <td className="py-4 px-6 text-slate-500">
+                      {new Date(req.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                    </td>
+                    <td className="py-4 px-6 font-medium text-slate-800">TBD</td>
+                    <td className="py-4 px-6 italic text-slate-600">"{req.guest_text}"</td>
+                    <td className="py-4 px-6">
+                      {!req.assigned_to ? (
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-slate-700 border border-gray-200">
+                          Pending AI
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-orange-50 text-accent-orange border border-orange-200">
+                          {req.assigned_to}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-4 px-6">
+                      {req.status === 'pending' ? (
+                        <div className="flex items-center space-x-2 text-accent-orange font-medium">
+                          <Clock className="w-4 h-4" />
+                          <span>Pending</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center space-x-2 text-emerald-600 font-medium">
+                          <CheckCircle2 className="w-4 h-4" />
+                          <span className="capitalize">{req.status}</span>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
