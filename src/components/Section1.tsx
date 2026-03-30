@@ -103,7 +103,7 @@ export default function Section1() {
           }}
         >
           <img
-            src="/16.png"
+            src="/Screenshot 2026-03-23 at 8.33.19 PM.png"
             alt="Modern futuristic building"
             className="w-full h-full object-cover"
           />
