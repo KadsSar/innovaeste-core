@@ -1,8 +1,31 @@
 import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2, ChevronLeft, Server, Wifi, Battery, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { supabase } from '../lib/supabase';
 import LiveHotelMap from '../components/LiveHotelMap';
 
 export default function Dashboard() {
+  const [requestText, setRequestText] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleProcessRequest = async () => {
+    if (!requestText.trim()) return;
+
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.from('service_requests').insert([{ guest_text: requestText }]);
+      if (error) {
+        console.error('Error inserting request:', error);
+      } else {
+        setRequestText("");
+      }
+    } catch (err) {
+      console.error('Unexpected error:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen font-sans text-slate-800 p-4 sm:p-8" style={{ backgroundColor: '#e8ddd1' }}>
       <div className="app-container max-w-7xl mx-auto bg-[#F9F8F3] rounded-[2rem] p-6 sm:p-10 shadow-2xl space-y-10">
@@ -102,11 +125,20 @@ export default function Dashboard() {
           <div className="flex flex-col md:flex-row gap-4">
             <input 
               type="text" 
+              value={requestText}
+              onChange={(e) => setRequestText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleProcessRequest();
+              }}
               placeholder="e.g., I spilled coffee in room 402, send a robot with towels" 
               className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-200 transition-all font-sans shadow-inner" style={{ backgroundColor: '#fdf9f4' }}
             />
-            <button className="flex items-center justify-center space-x-2 bg-accent-orange hover:bg-orange-500 active:bg-orange-600 text-white px-8 py-3 rounded-xl font-medium transition-all shadow-md hover:shadow-orange-500/20 active:translate-y-[1px]">
-              <span>Process Request</span>
+            <button 
+              onClick={handleProcessRequest}
+              disabled={isSubmitting || !requestText.trim()}
+              className="flex items-center justify-center space-x-2 bg-accent-orange hover:bg-orange-500 active:bg-orange-600 text-white px-8 py-3 rounded-xl font-medium transition-all shadow-md hover:shadow-orange-500/20 active:translate-y-[1px] disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <span>{isSubmitting ? "Sending..." : "Process Request"}</span>
               <Send className="w-4 h-4 ml-1" />
             </button>
           </div>
