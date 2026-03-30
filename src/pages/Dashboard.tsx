@@ -38,8 +38,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen font-sans text-slate-800 p-4 sm:p-8" style={{ backgroundColor: '#e8ddd1' }}>
-      <div className="app-container max-w-7xl mx-auto bg-[#F9F8F3] rounded-[2rem] p-6 sm:p-10 shadow-2xl space-y-10">
+    <div className="app-container min-h-screen w-full font-sans text-slate-800 bg-[#F9F8F3] p-6 sm:p-10 space-y-10">
         
         {/* Section 1: Header */}
         <header className="flex justify-between items-center border-b border-gray-100 pb-6">
@@ -259,7 +258,6 @@ export default function Dashboard() {
           </div>
         </section>
 
-      </div>
     </div>
   );
 }
