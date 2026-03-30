@@ -1,4 +1,4 @@
-import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2, ChevronLeft, Server, Wifi, Battery, TrendingUp } from 'lucide-react';
+import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2, ChevronLeft, Server, Wifi, Battery, TrendingUp, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
@@ -251,6 +251,10 @@ export default function Dashboard() {
                         <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-slate-700 border border-gray-200">
                           Pending AI
                         </span>
+                      ) : req.assigned_to === 'AI Thinking...' ? (
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-blue-50 text-blue-600 border border-blue-200 animate-pulse">
+                          {req.assigned_to}
+                        </span>
                       ) : (
                         <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-orange-50 text-accent-orange border border-orange-200">
                           {req.assigned_to}
@@ -258,7 +262,12 @@ export default function Dashboard() {
                       )}
                     </td>
                     <td className="py-4 px-6">
-                      {req.status === 'pending' ? (
+                      {req.status === 'Assigning...' ? (
+                        <div className="flex items-center space-x-2 text-blue-600 font-medium">
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Assigning...</span>
+                        </div>
+                      ) : req.status === 'pending' ? (
                         <div className="flex items-center space-x-2 text-accent-orange font-medium">
                           <Clock className="w-4 h-4" />
                           <span>Pending</span>
