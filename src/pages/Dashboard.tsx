@@ -71,6 +71,7 @@ export default function Dashboard() {
     }
   };
 
+  return (
     <div className="app-container min-h-screen w-full font-sans text-slate-800 relative p-6 sm:p-10">
       <ThreeWaves />
       
