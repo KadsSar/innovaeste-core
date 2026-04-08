@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 function HeroTitle() {
   const ref = useRef<HTMLDivElement>(null);
@@ -46,6 +46,22 @@ function HeroTitle() {
 
 export default function Section1() {
   const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
+  const homeMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (homeMenuRef.current && !homeMenuRef.current.contains(event.target as Node)) {
+        setIsHomeMenuOpen(false);
+      }
+    }
+
+    if (isHomeMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isHomeMenuOpen]);
 
   return (
     <div className="relative w-full text-slate-800" style={{ backgroundColor: '#0096C7' }}>
@@ -53,7 +69,7 @@ export default function Section1() {
       <nav className="flex justify-between items-center py-6 px-8 border-b border-white/20">
         {/* Left Links */}
         <div className="flex space-x-6 text-[11px] font-sans font-light uppercase tracking-wide text-white/80">
-          <div className="relative">
+          <div className="relative" ref={homeMenuRef}>
             <button 
               onClick={() => setIsHomeMenuOpen(!isHomeMenuOpen)}
               className="hover:text-white transition-colors uppercase outline-none"
