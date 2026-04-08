@@ -48,19 +48,19 @@ export default function Section1() {
   return (
     <div className="relative w-full text-slate-800" style={{ backgroundColor: '#0096C7' }}>
       {/* Navbar */}
-      <nav className="flex justify-between items-center py-6 px-8">
+      <nav className="flex justify-between items-center py-6 px-8 border-b border-white/20">
         {/* Left Links */}
-        <div className="flex space-x-6 text-[11px] font-sans font-light uppercase tracking-wide text-gray-500">
-          <a href="#" className="hover:text-black">Home</a>
-          <a href="#" className="hover:text-black">Agents</a>
-          <a href="#" className="hover:text-black whitespace-nowrap">Work in Progress</a>
-          <a href="#" className="hover:text-black">Collection</a>
-          <a href="#" className="hover:text-black flex items-center gap-1">Start Exploring <span>→</span></a>
+        <div className="flex space-x-6 text-[11px] font-sans font-light uppercase tracking-wide text-white/80">
+          <a href="#" className="hover:text-white transition-colors">Home</a>
+          <a href="#" className="hover:text-white transition-colors">Agents</a>
+          <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Work in Progress</a>
+          <a href="#" className="hover:text-white transition-colors">Collection</a>
+          <a href="#" className="hover:text-white transition-colors flex items-center gap-1">Start Exploring <span>→</span></a>
         </div>
 
         {/* Center Logo */}
         <div className="absolute left-1/2 -translate-x-1/2">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-800">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
             <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
             <polyline points="9 22 9 12 15 12 15 22" />
           </svg>
@@ -75,7 +75,7 @@ export default function Section1() {
               </div>
             ))}
           </div>
-          <div className="text-[11px] font-sans font-light text-gray-500">
+          <div className="text-[11px] font-sans font-light text-white/80 hover:text-white cursor-pointer transition-colors">
             EN | UA
           </div>
           <button className="bg-white border hover:bg-gray-50 transition-colors border-gray-200 rounded-full px-4 py-2 text-[11px] font-sans flex items-center shadow-sm">
