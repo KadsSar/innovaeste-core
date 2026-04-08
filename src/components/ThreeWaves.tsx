@@ -1,6 +1,32 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 import * as THREE from 'three';
+
+// Global store to hold smooth mouse coordinates regardless of z-index blocking
+const globalMouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+
+function CameraRig() {
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      globalMouse.targetX = (e.clientX / window.innerWidth) * 2 - 1;
+      globalMouse.targetY = -(e.clientY / window.innerHeight) * 2 + 1;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+  
+  useFrame((state) => {
+    // Smoothen mouse movements precisely via linear interpolation (lerp)
+    globalMouse.x = THREE.MathUtils.lerp(globalMouse.x, globalMouse.targetX, 0.04);
+    globalMouse.y = THREE.MathUtils.lerp(globalMouse.y, globalMouse.targetY, 0.04);
+    
+    // Flawless majestic camera parallax shift based on cursor
+    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, globalMouse.x * 12, 0.04);
+    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, 10 + globalMouse.y * 8, 0.04);
+    state.camera.lookAt(0, -6, 0);
+  });
+  return null;
+}
 
 function WaveLayer({ positionY, color, speed, waveHeight, isWireframe = false }: { positionY: number, color: string, speed: number, waveHeight: number, isWireframe?: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
@@ -20,9 +46,9 @@ function WaveLayer({ positionY, color, speed, waveHeight, isWireframe = false }:
     const time = state.clock.getElapsedTime() * speed;
     const positionAttr = meshRef.current.geometry.attributes.position as THREE.BufferAttribute;
     
-    // Add interactivity based on mouse pointer coordinates
-    const mx = state.pointer.x * 2.0; 
-    const my = state.pointer.y * 2.0;
+    // Add interactivity based on global smooth mouse coordinates
+    const mx = globalMouse.x * 5.0; 
+    const my = globalMouse.y * 5.0;
     
     for (let i = 0; i < positionAttr.count; i++) {
         const idx = i * 3;
@@ -63,7 +89,10 @@ function WaveLayer({ positionY, color, speed, waveHeight, isWireframe = false }:
 export default function ThreeWaves() {
   return (
     <div className="fixed inset-0 w-full h-full z-0 pointer-events-none" style={{ backgroundColor: '#CAF0F8', background: 'linear-gradient(180deg, rgba(202,240,248,1) 0%, rgba(144,224,239,1) 35%, rgba(0,180,216,1) 100%)' }}>
-      <Canvas camera={{ position: [0, 5, 20], fov: 60 }} className="pointer-events-auto">
+      <Canvas camera={{ position: [0, 5, 20], fov: 60 }}>
+        {/* Captures global window events and drives the camera parallax */}
+        <CameraRig />
+        
         <fog attach="fog" args={['#90E0EF', 10, 150]} />
         <ambientLight intensity={1.5} />
         
