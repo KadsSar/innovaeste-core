@@ -45,13 +45,36 @@ function HeroTitle() {
 }
 
 export default function Section1() {
+  const [isHomeMenuOpen, setIsHomeMenuOpen] = useState(false);
+
   return (
     <div className="relative w-full text-slate-800" style={{ backgroundColor: '#0096C7' }}>
       {/* Navbar */}
       <nav className="flex justify-between items-center py-6 px-8 border-b border-white/20">
         {/* Left Links */}
         <div className="flex space-x-6 text-[11px] font-sans font-light uppercase tracking-wide text-white/80">
-          <a href="#" className="hover:text-white transition-colors">Home</a>
+          <div className="relative">
+            <button 
+              onClick={() => setIsHomeMenuOpen(!isHomeMenuOpen)}
+              className="hover:text-white transition-colors uppercase outline-none"
+            >
+              Home
+            </button>
+            {isHomeMenuOpen && (
+              <div className="absolute top-full left-0 mt-4 w-48 bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-white/40 overflow-hidden z-50 text-slate-800 text-[11px] normal-case tracking-normal font-medium">
+                <div className="flex flex-col py-2">
+                  <a href="#" className="px-4 py-2.5 hover:bg-slate-50 hover:text-accent-orange transition-colors">Visit Packages</a>
+                  <a href="#" className="px-4 py-2.5 hover:bg-slate-50 hover:text-accent-orange transition-colors">Book a holiday</a>
+                  <a href="#" className="px-4 py-2.5 hover:bg-slate-50 hover:text-accent-orange transition-colors">Talk to AI chatbot</a>
+                  <a href="#" className="px-4 py-2.5 hover:bg-slate-50 hover:text-accent-orange transition-colors">Contact us</a>
+                  <a href="#" className="px-4 py-2.5 hover:bg-slate-50 hover:text-accent-orange transition-colors">People at Innoveaste</a>
+                  <a href="#" className="px-4 py-2.5 hover:bg-slate-50 hover:text-accent-orange transition-colors">Our goals</a>
+                  <a href="#" className="px-4 py-2.5 hover:bg-slate-50 hover:text-accent-orange transition-colors">Leave us a rating</a>
+                  <a href="#" className="px-4 py-2.5 hover:bg-slate-50 hover:text-accent-orange transition-colors">Book a holiday</a>
+                </div>
+              </div>
+            )}
+          </div>
           <a href="#" className="hover:text-white transition-colors">Agents</a>
           <a href="#" className="hover:text-white transition-colors whitespace-nowrap">Work in Progress</a>
           <a href="#" className="hover:text-white transition-colors">Collection</a>
