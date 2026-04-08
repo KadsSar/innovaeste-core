@@ -51,10 +51,10 @@ function Ocean() {
       position={[0, -10, -15]}
     >
       <meshStandardMaterial 
-        color="#0096C7" 
+        color="#00B4D8" 
         wireframe={false}
         roughness={0.1}
-        metalness={0.8}
+        metalness={0.6}
         flatShading={false}
       />
     </mesh>
@@ -63,16 +63,16 @@ function Ocean() {
 
 export default function ThreeWaves() {
   return (
-    <div className="fixed inset-0 w-full h-full z-0 pointer-events-none" style={{ backgroundColor: '#020024', background: 'linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%)' }}>
+    <div className="fixed inset-0 w-full h-full z-0 pointer-events-none" style={{ backgroundColor: '#CAF0F8', background: 'linear-gradient(180deg, rgba(202,240,248,1) 0%, rgba(144,224,239,1) 35%, rgba(0,180,216,1) 100%)' }}>
       {/* We set pointerEvents auto ONLY on the canvas to catch mouse events, 
           but ensure it stays behind the dashboard via z-index layer handling */}
       <Canvas camera={{ position: [0, 5, 20], fov: 60 }} className="pointer-events-auto">
-        <fog attach="fog" args={['#03045e', 10, 60]} />
-        <ambientLight intensity={0.5} />
-        {/* Lights mapped to different shades of blue */}
-        <directionalLight position={[10, 20, 5]} intensity={4} color="#48cae4" />
-        <directionalLight position={[-10, 5, 10]} intensity={3} color="#0077b6" />
-        <pointLight position={[0, -5, -5]} intensity={10} color="#023e8a" />
+        <fog attach="fog" args={['#90E0EF', 10, 60]} />
+        <ambientLight intensity={1.2} />
+        {/* Lights mapped to much lighter shades of aqua and sky blue */}
+        <directionalLight position={[10, 20, 5]} intensity={4} color="#E0FBFC" />
+        <directionalLight position={[-10, 5, 10]} intensity={3} color="#00B4D8" />
+        <pointLight position={[0, -5, -5]} intensity={10} color="#0077b6" />
         <Ocean />
       </Canvas>
     </div>
