@@ -1,10 +1,10 @@
-import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2, ChevronLeft, Server, Wifi, Battery, TrendingUp, Loader2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Sparkles, Send, Bot, Wrench, Clock, CheckCircle2, ChevronLeft, Server, Wifi, Battery, TrendingUp, Loader2, LogOut } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import LiveHotelMap from '../components/LiveHotelMap';
 
 export default function Dashboard() {
+  const navigate = useNavigate();
   const [requestText, setRequestText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [requests, setRequests] = useState<any[]>([]);
@@ -81,12 +81,21 @@ export default function Dashboard() {
             <p className="mt-2 text-sm text-slate-500">Live AI Operations &amp; Task Routing</p>
           </div>
         </div>
-        <div className="hidden sm:flex items-center space-x-2 px-4 py-2 rounded-full border border-orange-200 bg-orange-50 text-accent-orange text-sm font-medium">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-orange"></span>
-          </span>
-          <span>System Online</span>
+        <div className="flex items-center space-x-4">
+          <div className="hidden sm:flex items-center space-x-2 px-4 py-2 rounded-full border border-orange-200 bg-orange-50 text-accent-orange text-sm font-medium">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-orange"></span>
+            </span>
+            <span>System Online</span>
+          </div>
+          <button 
+            onClick={() => navigate('/')}
+            className="flex items-center space-x-2 px-4 py-2 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-sm font-medium transition-colors"
+          >
+            <span>Logout</span>
+            <LogOut className="w-4 h-4" />
+          </button>
         </div>
       </header>
 
@@ -226,9 +235,6 @@ export default function Dashboard() {
           </div>
         </div>
       </section>
-
-      {/* Section 3.5: Live 2D Hotel Map */}
-      <LiveHotelMap />
 
       {/* Section 4: Live Operations Feed */}
       <section className="border border-gray-100 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)]" style={{ backgroundColor: '#fdf9f4' }}>
