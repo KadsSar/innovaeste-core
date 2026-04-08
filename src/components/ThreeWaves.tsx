@@ -22,13 +22,13 @@ function CameraRig() {
     
     // Flawless majestic camera parallax shift based on cursor (subtle limits)
     state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, globalMouse.x * 5, 0.02);
-    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, 8 + globalMouse.y * 3, 0.02);
-    state.camera.lookAt(0, -3, 0);
+    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, globalMouse.y * 5, 0.02);
+    state.camera.lookAt(0, 0, 0);
   });
   return null;
 }
 
-function WaveLayer({ positionY, color, speed, waveHeight, isWireframe = false }: { positionY: number, color: string, speed: number, waveHeight: number, isWireframe?: boolean }) {
+function WaveLayer({ positionZ, color, speed, waveHeight, isWireframe = false }: { positionZ: number, color: string, speed: number, waveHeight: number, isWireframe?: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null);
   
   // Create a dense plane geometry: width, height, widthSegments, heightSegments
@@ -56,11 +56,11 @@ function WaveLayer({ positionY, color, speed, waveHeight, isWireframe = false }:
         const y = originalPositions[idx + 1];
         
         // Procedural overlapping math (wider frequency, smoother arcs)
-        const wave1 = Math.sin(x * 0.03 + time * 1.2) * Math.cos(y * 0.03 + time * 0.8) * (waveHeight * 0.8);
-        const wave2 = Math.sin(x * 0.05 - time * 0.5) * (waveHeight * 0.3);
+        const wave1 = Math.sin(x * 0.04 + time * 1.2) * Math.cos(y * 0.04 + time * 0.8) * (waveHeight * 0.8);
+        const wave2 = Math.sin(x * 0.06 - time * 0.5) * (waveHeight * 0.5);
         const interactiveWave = Math.sin(x * 0.02 + mx) * Math.cos(y * 0.02 + my) * (waveHeight * 0.5);
 
-        // Apply z depth
+        // Apply depth toward the camera
         positionAttr.setZ(i, wave1 + wave2 + interactiveWave);
     }
     
@@ -72,8 +72,8 @@ function WaveLayer({ positionY, color, speed, waveHeight, isWireframe = false }:
     <mesh 
       ref={meshRef} 
       geometry={geom} 
-      rotation={[-Math.PI / 2.2, 0, 0]} 
-      position={[0, positionY, 0]}
+      rotation={[0, 0, 0]} 
+      position={[0, 0, positionZ]}
     >
       <meshStandardMaterial 
         color={color} 
@@ -89,28 +89,28 @@ function WaveLayer({ positionY, color, speed, waveHeight, isWireframe = false }:
 export default function ThreeWaves() {
   return (
     <div className="fixed inset-0 w-full h-full z-0 pointer-events-none" style={{ backgroundColor: '#CAF0F8', background: 'linear-gradient(180deg, rgba(202,240,248,1) 0%, rgba(144,224,239,1) 35%, rgba(0,180,216,1) 100%)' }}>
-      <Canvas camera={{ position: [0, 5, 20], fov: 60 }}>
+      <Canvas camera={{ position: [0, 0, 25], fov: 60 }} className="pointer-events-auto">
         {/* Captures global window events and drives the camera parallax */}
         <CameraRig />
         
-        <fog attach="fog" args={['#90E0EF', 10, 150]} />
+        <fog attach="fog" args={['#90E0EF', 15, 60]} />
         <ambientLight intensity={1.5} />
         
-        <directionalLight position={[10, 20, 5]} intensity={4} color="#FFF" />
-        <directionalLight position={[-10, 5, 10]} intensity={3} color="#E0FBFC" />
-        <pointLight position={[0, -5, -5]} intensity={10} color="#00B4D8" />
+        <directionalLight position={[10, 10, 15]} intensity={4} color="#FFF" />
+        <directionalLight position={[-10, -10, 15]} intensity={3} color="#E0FBFC" />
+        <pointLight position={[0, 0, 10]} intensity={10} color="#00B4D8" />
         
         {/* Layer 1: Deepest, darkest, slowest wave */}
-        <WaveLayer positionY={-8} color="#0077b6" speed={0.5} waveHeight={4} />
+        <WaveLayer positionZ={-15} color="#0077b6" speed={0.5} waveHeight={5} />
         
         {/* Layer 2: Mid layer, moderate speed */}
-        <WaveLayer positionY={-5} color="#0096C7" speed={0.8} waveHeight={3} />
+        <WaveLayer positionZ={-10} color="#0096C7" speed={0.8} waveHeight={4} />
         
         {/* Layer 3: Highest, brightest, fastest wave */}
-        <WaveLayer positionY={-3} color="#00B4D8" speed={1.2} waveHeight={2} />
+        <WaveLayer positionZ={-5} color="#00B4D8" speed={1.2} waveHeight={3} />
         
         {/* Layer 4: Abstract glowing wireframe that clips through all of them! */}
-        <WaveLayer positionY={-5} color="#E0FBFC" speed={0.7} waveHeight={3.5} isWireframe={true} />
+        <WaveLayer positionZ={-6} color="#E0FBFC" speed={0.7} waveHeight={6} isWireframe={true} />
       </Canvas>
     </div>
   );
