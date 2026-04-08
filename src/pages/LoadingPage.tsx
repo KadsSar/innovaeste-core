@@ -16,9 +16,9 @@ export default function LoadingPage() {
       setProgress(p => Math.min(p + (100 / 45), 100)); // ~4.5 seconds to 100%
     }, 100);
 
-    // Navigate to dashboard after 5 seconds
+    // Navigate to login after 5 seconds
     const navTimer = setTimeout(() => {
-      navigate('/dashboard');
+      navigate('/login');
     }, 5000);
 
     return () => {

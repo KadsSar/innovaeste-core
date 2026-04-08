@@ -11,6 +11,7 @@ export default function AdminLogin() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     if (password === 'admin123') {
+      sessionStorage.setItem('innovaeste_admin', 'true');
       setError('');
       navigate('/dashboard');
     } else {

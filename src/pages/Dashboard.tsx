@@ -10,6 +10,12 @@ export default function Dashboard() {
   const [requests, setRequests] = useState<any[]>([]);
   const [showAllRequests, setShowAllRequests] = useState(false);
 
+  useEffect(() => {
+    if (sessionStorage.getItem('innovaeste_admin') !== 'true') {
+      navigate('/login');
+    }
+  }, [navigate]);
+
   const displayedRequests = showAllRequests ? requests : requests.slice(0, 5);
 
   const fetchRequests = async () => {
@@ -90,7 +96,10 @@ export default function Dashboard() {
             <span>System Online</span>
           </div>
           <button 
-            onClick={() => navigate('/')}
+            onClick={() => {
+              sessionStorage.removeItem('innovaeste_admin');
+              navigate('/');
+            }}
             className="flex items-center space-x-2 px-4 py-2 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-sm font-medium transition-colors"
           >
             <span>Logout</span>
