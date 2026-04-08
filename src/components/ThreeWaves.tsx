@@ -47,7 +47,7 @@ function WaveLayer({ positionY, color, speed, waveHeight, isWireframe = false }:
       ref={meshRef} 
       geometry={geom} 
       rotation={[-Math.PI / 2.2, 0, 0]} 
-      position={[0, positionY, -20]}
+      position={[0, positionY, 0]}
     >
       <meshStandardMaterial 
         color={color} 
@@ -64,7 +64,7 @@ export default function ThreeWaves() {
   return (
     <div className="fixed inset-0 w-full h-full z-0 pointer-events-none" style={{ backgroundColor: '#CAF0F8', background: 'linear-gradient(180deg, rgba(202,240,248,1) 0%, rgba(144,224,239,1) 35%, rgba(0,180,216,1) 100%)' }}>
       <Canvas camera={{ position: [0, 5, 20], fov: 60 }} className="pointer-events-auto">
-        <fog attach="fog" args={['#90E0EF', 10, 60]} />
+        <fog attach="fog" args={['#90E0EF', 10, 150]} />
         <ambientLight intensity={1.5} />
         
         <directionalLight position={[10, 20, 5]} intensity={4} color="#FFF" />
@@ -72,16 +72,16 @@ export default function ThreeWaves() {
         <pointLight position={[0, -5, -5]} intensity={10} color="#00B4D8" />
         
         {/* Layer 1: Deepest, darkest, slowest wave */}
-        <WaveLayer positionY={-14} color="#0077b6" speed={0.5} waveHeight={4} />
+        <WaveLayer positionY={-8} color="#0077b6" speed={0.5} waveHeight={4} />
         
         {/* Layer 2: Mid layer, moderate speed */}
-        <WaveLayer positionY={-10} color="#0096C7" speed={0.8} waveHeight={3} />
+        <WaveLayer positionY={-5} color="#0096C7" speed={0.8} waveHeight={3} />
         
         {/* Layer 3: Highest, brightest, fastest wave */}
-        <WaveLayer positionY={-7} color="#00B4D8" speed={1.2} waveHeight={2} />
+        <WaveLayer positionY={-3} color="#00B4D8" speed={1.2} waveHeight={2} />
         
         {/* Layer 4: Abstract glowing wireframe that clips through all of them! */}
-        <WaveLayer positionY={-10} color="#E0FBFC" speed={0.7} waveHeight={3.5} isWireframe={true} />
+        <WaveLayer positionY={-5} color="#E0FBFC" speed={0.7} waveHeight={3.5} isWireframe={true} />
       </Canvas>
     </div>
   );
