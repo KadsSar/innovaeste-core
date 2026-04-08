@@ -17,13 +17,13 @@ function CameraRig() {
   
   useFrame((state) => {
     // Smoothen mouse movements precisely via linear interpolation (lerp)
-    globalMouse.x = THREE.MathUtils.lerp(globalMouse.x, globalMouse.targetX, 0.04);
-    globalMouse.y = THREE.MathUtils.lerp(globalMouse.y, globalMouse.targetY, 0.04);
+    globalMouse.x = THREE.MathUtils.lerp(globalMouse.x, globalMouse.targetX, 0.02);
+    globalMouse.y = THREE.MathUtils.lerp(globalMouse.y, globalMouse.targetY, 0.02);
     
-    // Flawless majestic camera parallax shift based on cursor
-    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, globalMouse.x * 12, 0.04);
-    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, 10 + globalMouse.y * 8, 0.04);
-    state.camera.lookAt(0, -6, 0);
+    // Flawless majestic camera parallax shift based on cursor (subtle limits)
+    state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, globalMouse.x * 5, 0.02);
+    state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, 8 + globalMouse.y * 3, 0.02);
+    state.camera.lookAt(0, -3, 0);
   });
   return null;
 }
@@ -43,22 +43,22 @@ function WaveLayer({ positionY, color, speed, waveHeight, isWireframe = false }:
     if (!meshRef.current) return;
     
     // Speed parameter makes different layers move differently
-    const time = state.clock.getElapsedTime() * speed;
+    const time = state.clock.getElapsedTime() * speed * 0.4; // drastically slowed down base rolling speed
     const positionAttr = meshRef.current.geometry.attributes.position as THREE.BufferAttribute;
     
-    // Add interactivity based on global smooth mouse coordinates
-    const mx = globalMouse.x * 5.0; 
-    const my = globalMouse.y * 5.0;
+    // Add interactivity based on global smooth mouse coordinates (toned down scaling)
+    const mx = globalMouse.x * 1.5; 
+    const my = globalMouse.y * 1.5;
     
     for (let i = 0; i < positionAttr.count; i++) {
         const idx = i * 3;
         const x = originalPositions[idx];
         const y = originalPositions[idx + 1];
         
-        // Procedural overlapping math
-        const wave1 = Math.sin(x * 0.1 + time * 0.8) * Math.cos(y * 0.1 + time * 0.4) * (waveHeight * 0.8);
-        const wave2 = Math.sin(x * 0.05 - time * 0.6) * (waveHeight * 0.5);
-        const interactiveWave = Math.sin(x * 0.02 + mx) * Math.cos(y * 0.02 + my) * waveHeight;
+        // Procedural overlapping math (wider frequency, smoother arcs)
+        const wave1 = Math.sin(x * 0.03 + time * 1.2) * Math.cos(y * 0.03 + time * 0.8) * (waveHeight * 0.8);
+        const wave2 = Math.sin(x * 0.05 - time * 0.5) * (waveHeight * 0.3);
+        const interactiveWave = Math.sin(x * 0.02 + mx) * Math.cos(y * 0.02 + my) * (waveHeight * 0.5);
 
         // Apply z depth
         positionAttr.setZ(i, wave1 + wave2 + interactiveWave);
